@@ -55,7 +55,8 @@ class KeyValueSqlite:
         self.timeout = timeout
         self.db_path = to_path(db_path)
         folder_path = os.path.dirname(self.db_path)
-        os.makedirs(folder_path, exist_ok=True)
+        if folder_path:
+            os.makedirs(folder_path, exist_ok=True)
         self.table_name = table_name.replace("-", "_")
         if self.db_path in ["", ":memory:"]:
             raise ValueError("Can not use in memory database for keyvalue_db")
